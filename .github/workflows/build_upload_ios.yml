@@ -1,0 +1,87 @@
+#Main
+name: iOS Build & Upload to TestFlight
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-ios:
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby Environment
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+
+      - name: Install CocoaPods
+        run: pod install
+
+      - name: Select Xcode Version
+        run: sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer
+
+      - name: Decode and Save App Store API Key
+        run: |
+          echo "${{ secrets.APP_STORE_API_KEY }}" | base64 --decode > $RUNNER_TEMP/AuthKey.p8
+          ls -al $RUNNER_TEMP/AuthKey.p8  # Debug: Check if file exists
+      
+      #- name: Install App Store API Key
+       # run: |
+        #  echo "${{ secrets.APP_STORE_API_KEY }}" | base64 --decode > AuthKey.p8
+
+
+      - name: Decode Signing Certificate
+        env:
+          CERTIFICATE_BASE64: ${{ secrets.IOS_DIST_SIGNING_KEY }}
+        run: |
+          echo "$CERTIFICATE_BASE64" | base64 --decode > signing-cert.p12
+
+      - name: Build iOS App
+        run: |
+          xcodebuild clean build \
+          -workspace InstaCash.xcworkspace \
+          -scheme InstaCash \
+          -destination 'generic/platform=iOS' \
+          -allowProvisioningUpdates \
+          -authenticationKeyPath /Users/sameerkhan/Desktop/InstaCash\ Apps/NayaPurano/p8\ key/AuthKey_PZ64YX9ML3.p8 \
+          -authenticationKeyID ${{ secrets.APP_STORE_KEY_ID }} \
+          -authenticationKeyIssuerID ${{ secrets.APP_STORE_ISSUER_ID }}
+  
+
+      - name: Upload iOS Binary to TestFlight
+        uses: maierj/fastlane-action@v1.4.0
+        with:
+          lane: upload_ios_beta_Testflight
+        env:
+          DEVELOPER_APP_ID: ${{ secrets.DEVELOPER_APP_ID }}
+          DEVELOPER_APP_IDENTIFIER: ${{ secrets.DEVELOPER_APP_IDENTIFIER }}
+          DEVELOPER_PORTAL_TEAM_ID: ${{ secrets.DEVELOPER_PORTAL_TEAM_ID }}
+          FASTLANE_APPLE_ID: ${{ secrets.FASTLANE_APPLE_ID }}
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          GIT_AUTHORIZATION: ${{ secrets.GIT_AUTHORIZATION }}
+          PROVISIONING_PROFILE_SPECIFIER: ${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}
+          PROVISIONING_PROFILE_ID: ${{ secrets.PROVISIONING_PROFILE_ID }}
+          TEMP_KEYCHAIN_PASSWORD: ${{ secrets.TEMP_KEYCHAIN_PASSWORD }}
+          TEMP_KEYCHAIN_USER: ${{ secrets.TEMP_KEYCHAIN_USER }}
+          ASC_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          ASC_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.IOS_DIST_SIGNING_KEY_PASSWORD }}
+          SIGNING_KEY_FILE_PATH: signing-cert.p12
+          FIREBASE_GROUP: ${{ secrets.FIREBASE_GROUP }}
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+          FIREBASE_TOKEN_CLI: ${{ secrets.FIREBASE_TOKEN_CLI }}
+
+      - name: Upload IPA and dSYM files to GitHub Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-app-artifacts
+          path: |
+            build/*.ipa
+            build/*.app.dSYM.zip
