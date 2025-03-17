@@ -44,11 +44,11 @@ jobs:
       - name: Build iOS App
         run: |
           xcodebuild clean build \
-          -workspace InstaCash.xcworkspace \
-          -scheme InstaCash \
+          -workspace InstaCashSDK.xcworkspace \
+          -scheme InstaCashSDK \
           -destination 'generic/platform=iOS' \
           -allowProvisioningUpdates \
-          -authenticationKeyPath /Users/sameerkhan/Desktop/InstaCash\ Apps/NayaPurano/p8\ key/AuthKey_PZ64YX9ML3.p8 \
+          -authenticationKeyPath /Users/sameerkhan/Desktop/InstaCash\ Apps/p8\ key\ of\ InstaCash/AuthKey_DVM2UH7XLT.p8 \
           -authenticationKeyID ${{ secrets.APP_STORE_KEY_ID }} \
           -authenticationKeyIssuerID ${{ secrets.APP_STORE_ISSUER_ID }}
   
