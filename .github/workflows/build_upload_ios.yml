@@ -6,28 +6,33 @@ on:
     #branches: [ main ]
 jobs:
  build-ios:
-   runs-on: macos-14
+   runs-on: macos-latest
    steps:
      - name: Checkout repository
-       uses: actions/checkout@v3
+       uses: actions/checkout@v4
+
      - name: Set up ruby env
        uses: ruby/setup-ruby@v1
        with:
          ruby-version: 3.4.2
          bundler-cache: true
+
      - name: Decode signing certificate into a file
        env:
          CERTIFICATE_BASE64: ${{ secrets.IOS_DIST_SIGNING_KEY }}
        run: |
          echo $CERTIFICATE_BASE64 | base64 --decode > signing-cert.p12
+
      - name: pod install
        run: pod install
      - name: pod update
        run: pod update
+
      - name: Select Xcode       
        run: sudo xcode-select -switch /Applications/Xcode-16.0.app/Contents/Developer
      - name: Build
        run: xcodebuild clean build -workspace InstaCashSDK.xcworkspace -scheme <InstaCashSDK> -destination 'platform=iOS Simulator,name=iPhone 16 Pro example,OS=18.2'
+       
      - name: upload iOS binary
        uses: maierj/fastlane-action@v1.4.0
        with:
