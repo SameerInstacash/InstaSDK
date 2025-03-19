@@ -28,17 +28,17 @@ jobs:
      - name: pod update
        run: pod update
 
-     #- name: Select Xcode    
-       #run: sudo xcode-select -switch /Applications/Xcode-16.0.app/Contents/Developer
-
-     - name: List available Xcode versions
-       run: sudo ls /Applications | grep Xcode
-
-     - name: Set Xcode 16.0
+     - name: Select Xcode Version
        run: sudo xcode-select -switch /Applications/Xcode-16.0.app/Contents/Developer
+
+    #  - name: List available Xcode versions
+    #    run: sudo ls /Applications | grep Xcode
+
+    #  - name: Set Xcode 16.0
+    #    run: sudo xcode-select -switch /Applications/Xcode-16.0.app/Contents/Developer
       
-     - name: Verify Xcode version
-       run: xcodebuild -version
+    #  - name: Verify Xcode version
+    #    run: xcodebuild -version
 
      - name: Build
        run: xcodebuild clean build -workspace InstaCashSDK.xcworkspace -scheme <InstaCashSDK> -destination 'platform=iOS Simulator,name=iPhone 16 Pro example,OS=18.2'
