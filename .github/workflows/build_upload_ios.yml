@@ -24,8 +24,7 @@ jobs:
        run: pod install
      - name: pod update
        run: pod update
-     - name: Select Xcode
-       #run: sudo Xcode-select -switch /Applications/Xcode-16.0.app
+     - name: Select Xcode       
        run: sudo xcode-select -switch /Applications/Xcode-16.0.app/Contents/Developer
      - name: Build
        run: xcodebuild clean build -workspace InstaCashSDK.xcworkspace -scheme <InstaCashSDK> -destination 'platform=iOS Simulator,name=iPhone 16 Pro example,OS=18.2'
