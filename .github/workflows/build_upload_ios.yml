@@ -32,7 +32,7 @@ jobs:
        run: sudo xcode-select -switch /Applications/Xcode_16.2.app/Contents/Developer
 
      - name: Build
-       run: xcodebuild clean build -workspace InstaCashSDK.xcworkspace -scheme InstaCashSDK -destination 'platform=iOS Simulator,name=iPhone 16 Pro example,OS=18.2'
+       run: xcodebuild clean build -workspace InstaCashSDK.xcworkspace -scheme InstaCashSDK -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=18.2'
 
      - name: upload iOS binary
        uses: maierj/fastlane-action@v1.4.0
