@@ -1,3 +1,4 @@
+config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '18.0'
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '18.0'
 
