@@ -54,7 +54,6 @@ APPLE_KEY_ID = ENV["APPLE_KEY_ID"]
 APPLE_ISSUER_ID = ENV["APPLE_ISSUER_ID"]
 APPLE_KEY_CONTENT = ENV["APPLE_KEY_CONTENT"]
 
-
 DEVELOPER_APP_ID = ENV["DEVELOPER_APP_ID"]
 DEVELOPER_APP_IDENTIFIER = ENV["DEVELOPER_APP_IDENTIFIER"]
 MATCH_PASSWORD = ENV["MATCH_PASSWORD"]
@@ -170,8 +169,7 @@ platform :ios do
       output_name: "InstaCashSDK.ipa",
       export_options: {
         provisioningProfiles: {
-          #"in.InstaSDK.InstaCashSDK" => "match AppStore in.InstaSDK.InstaCashSDK"
-          "in.InstaSDK.InstaCashSDK" => "match AppStore in.InstaSDK.InstaCashSDK 1742215192"
+          "in.InstaSDK.InstaCashSDK" => "match AppStore in.InstaSDK.InstaCashSDK"          
         },
         xcargs: "IPHONEOS_DEPLOYMENT_TARGET=17.0"
       },
