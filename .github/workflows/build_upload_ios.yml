@@ -21,7 +21,7 @@ jobs:
        env:
          CERTIFICATE_BASE64: ${{ secrets.IOS_DIST_SIGNING_KEY }}
        run: |
-         echo $CERTIFICATE_BASE64 | base64 --decode > signing-cert.p12
+         echo "$CERTIFICATE_BASE64" | base64 --decode > signing-cert.p12
 
      - name: pod install
        run: pod install
@@ -44,18 +44,18 @@ jobs:
          DEVELOPER_APP_IDENTIFIER: '${{ secrets.DEVELOPER_APP_IDENTIFIER }}'
          DEVELOPER_PORTAL_TEAM_ID: '${{ secrets.DEVELOPER_PORTAL_TEAM_ID }}'
          FASTLANE_APPLE_ID: '${{ secrets.FASTLANE_APPLE_ID }}'
-         FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: '${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}'
+         #FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: '${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}'
          MATCH_PASSWORD: '${{ secrets.MATCH_PASSWORD }}'
          GIT_AUTHORIZATION: '${{ secrets.GIT_AUTHORIZATION }}'
          PROVISIONING_PROFILE_SPECIFIER: '${{ secrets.PROVISIONING_PROFILE_SPECIFIER }}'
-         PROVISIONING_PROFILE_ID: '${{ secrets.PROVISIONING_PROFILE_ID }}'
+         #PROVISIONING_PROFILE_ID: '${{ secrets.PROVISIONING_PROFILE_ID }}'
          TEMP_KEYCHAIN_PASSWORD: '${{ secrets.TEMP_KEYCHAIN_PASSWORD }}'
          TEMP_KEYCHAIN_USER: '${{ secrets.TEMP_KEYCHAIN_USER }}'
-         ASC_KEY_ID: '${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}'
-         ASC_ISSUER_ID: '${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}'
-         ASC_KEY: '${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}'
-         SIGNING_KEY_PASSWORD: '${{ secrets.IOS_DIST_SIGNING_KEY_PASSWORD }}'
-         SIGNING_KEY_FILE_PATH: 'signing-cert.p12'
+         ASC_KEY_ID: '${{ secrets.APPLE_KEY_ID }}'
+         ASC_ISSUER_ID: '${{ secrets.APPLE_ISSUER_ID }}'
+         ASC_KEY: '${{ secrets.APPLE_KEY_CONTENT }}'
+         SIGNING_KEY_PASSWORD: '${{ secrets.IOS_DIST_SIGNING_PASSWORD }}'
+         #SIGNING_KEY_FILE_PATH: 'signing-cert.p12'
          #FIREBASE_GROUP: '${{ secrets.FIREBASE_GROUP }}'
          #FIREBASE_APP_ID: '${{ secrets.FIREBASE_APP_ID }}'
          #FIREBASE_TOKEN_CLI: '${{ secrets.FIREBASE_TOKEN_CLI }}'
