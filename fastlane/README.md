@@ -13,7 +13,26 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 # Available Actions
 
+### setBuildNumber
+
+```sh
+[bundle exec] fastlane setBuildNumber
+```
+
+Auto increments and sets the build number.
+
+----
+
+
 ## iOS
+
+### ios beta
+
+```sh
+[bundle exec] fastlane ios beta
+```
+
+Push a new beta build to TestFlight
 
 ### ios upload_ios_beta_Testflight
 
