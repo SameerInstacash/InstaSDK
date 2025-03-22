@@ -161,6 +161,7 @@ platform :ios do
     )
 
     gym(
+      output_directory: "./build",
       output_name: "InstaCashSDK",
       workspace: "InstaCashSDK.xcworkspace",
       scheme: "InstaCashSDK",
