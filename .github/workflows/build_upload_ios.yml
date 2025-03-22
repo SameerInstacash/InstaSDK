@@ -51,6 +51,8 @@ jobs:
         #  PROVISIONING_PROFILE_ID: '${{ secrets.PROVISIONING_PROFILE_ID }}'
          TEMP_KEYCHAIN_PASSWORD: '${{ secrets.TEMP_KEYCHAIN_PASSWORD }}'
          TEMP_KEYCHAIN_USER: '${{ secrets.TEMP_KEYCHAIN_USER }}'
+         PROVISIONING_PROFILE_ID: "match AppStore in.InstaSDK.InstaCashSDK"
+
         #  ASC_KEY_ID: '${{ secrets.APPLE_KEY_ID }}'
         #  ASC_ISSUER_ID: '${{ secrets.APPLE_ISSUER_ID }}'
         #  ASC_KEY: '${{ secrets.APPLE_KEY_CONTENT }}'
