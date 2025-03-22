@@ -170,7 +170,8 @@ platform :ios do
       output_name: "InstaCashSDK.ipa",
       export_options: {
         provisioningProfiles: {
-          "in.InstaSDK.InstaCashSDK" => "match AppStore in.InstaSDK.InstaCashSDK"
+          #"in.InstaSDK.InstaCashSDK" => "match AppStore in.InstaSDK.InstaCashSDK"
+          "in.InstaSDK.InstaCashSDK" => "match AppStore in.InstaSDK.InstaCashSDK 1742215192"
         },
         xcargs: "IPHONEOS_DEPLOYMENT_TARGET=17.0"
       },
