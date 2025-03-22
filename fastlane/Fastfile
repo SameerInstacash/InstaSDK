@@ -166,7 +166,7 @@ platform :ios do
       workspace: "InstaCashSDK.xcworkspace",
       scheme: "InstaCashSDK",
       export_method: "app-store",
-      output_directory: "/Users/sameerkhan/Downloads/InstaCashSDK/",
+      #output_directory: "/Users/sameerkhan/Downloads/InstaCashSDK/",
       output_name: "InstaCashSDK.ipa",
       export_options: {
         provisioningProfiles: {
