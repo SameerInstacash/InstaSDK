@@ -160,35 +160,35 @@ platform :ios do
       api_key: api_key
     )
 
-    gym(
-      output_directory: "./build",
-      output_name: "InstaCashSDK",
-      workspace: "InstaCashSDK.xcworkspace",
-      scheme: "InstaCashSDK",
-      export_method: "app-store",
-      #output_directory: "/Users/sameerkhan/Downloads/InstaCashSDK/",
-      output_name: "InstaCashSDK.ipa",
-      export_options: {
-        provisioningProfiles: {
-          "in.InstaSDK.InstaCashSDK" => "match AppStore in.InstaSDK.InstaCashSDK" 
-        },
-        xcargs: "IPHONEOS_DEPLOYMENT_TARGET=17.0"
-      },
-      clean: true
-    )
-
     # gym(
-    #   configuration: "Release",
+    #   output_directory: "./build",
+    #   output_name: "InstaCashSDK",
     #   workspace: "InstaCashSDK.xcworkspace",
     #   scheme: "InstaCashSDK",
     #   export_method: "app-store",
+    #   #output_directory: "/Users/sameerkhan/Downloads/InstaCashSDK/",
+    #   output_name: "InstaCashSDK.ipa",
     #   export_options: {
     #     provisioningProfiles: {
-    #         DEVELOPER_APP_ID => PROVISIONING_PROFILE_SPECIFIER,
-    #         DEVELOPER_APP_IDENTIFIER => PROVISIONING_PROFILE_ID
-    #     }
-    #   }
+    #       "in.InstaSDK.InstaCashSDK" => "match AppStore in.InstaSDK.InstaCashSDK" 
+    #     },
+    #     xcargs: "IPHONEOS_DEPLOYMENT_TARGET=17.0"
+    #   },
+    #   clean: true
     # )
+
+    gym(
+      configuration: "Release",
+      workspace: "InstaCashSDK.xcworkspace",
+      scheme: "InstaCashSDK",
+      export_method: "app-store",
+      export_options: {
+        provisioningProfiles: {
+            DEVELOPER_APP_ID => PROVISIONING_PROFILE_SPECIFIER,
+            DEVELOPER_APP_IDENTIFIER => PROVISIONING_PROFILE_ID
+        }
+      }
+    )
 
     #increment_version_number(version_number: 1.0.0),
     #increment_build_number(build_number: 30)
