@@ -160,6 +160,7 @@ platform :ios do
       api_key: api_key
     )
 
+    #Use it when push build using Fastlane command from terminal
     # gym(
     #   output_directory: "./build",
     #   output_name: "InstaCashSDK",
@@ -177,6 +178,7 @@ platform :ios do
     #   clean: true
     # )
 
+    #Use it when push build using Github-Action
     gym(
       configuration: "Release",
       workspace: "InstaCashSDK.xcworkspace",
